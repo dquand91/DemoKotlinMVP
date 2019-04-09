@@ -1,6 +1,7 @@
 package com.example.demomvpkotlin.di
 
 import com.example.demomvpkotlin.ui.xbase.BasePresenter
+import com.example.demomvpkotlin.ui.xbase.BaseView
 
 public  class PresenterProvider {
 
@@ -8,7 +9,7 @@ public  class PresenterProvider {
         return classTypeSource.canonicalName.equals(classTypeDestination.canonicalName)
     }
 
-    open fun <P : BasePresenter<*>> provide(classType: Class<P>): P {
+    open fun <P : BasePresenter<BaseView>> provide(classType: Class<P>): P {
 //        if (matched(classType, MainContract.Presenter::class.java!!)) {
 //            return MainPresenter()
 //        }

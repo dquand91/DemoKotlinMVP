@@ -6,6 +6,5 @@ public interface BaseView {
 
     fun hideLoading()
 
-    fun <M> showMessage(message : M)
 
 }
