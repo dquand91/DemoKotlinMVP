@@ -1,57 +1,51 @@
-package com.example.demomvpkotlin.ui.xbase
+package com.example.demomvpkotlin.ui.xbase.view
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.example.demomvpkotlin.R
 import com.example.demomvpkotlin.customview.CustomProgressDialog
-import com.example.demomvpkotlin.di.PresenterProvider
+import com.example.demomvpkotlin.ui.xbase.presenter.BaseAppPresenter
 import com.example.demomvpkotlin.utils.AppLogger
 
-abstract class BaseActivity<P : BasePresenter<BaseView>> : AppCompatActivity(), BaseView{
+abstract class BaseActivity : AppCompatActivity(), BaseView {
 
-    private var presenter: P? = null
     private var dialog : CustomProgressDialog? = null
+    protected lateinit var presenter: BaseAppPresenter<*>
 
-    /**
-     * @return it's presenter
-     */
-    fun getPresenter(): P? {
-        return presenter
-    }
+    protected abstract fun initializeDagger()
 
-    private fun setPresenter(): P {
-        return PresenterProvider().provide(providePresenter())
-    }
+    protected abstract fun initializePresenter()
 
-    protected abstract fun providePresenter(): Class<P>
+    abstract val layoutId: Int
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AppLogger.lifecycle(this@BaseActivity, "onCreate")
         super.onCreate(savedInstanceState)
-        if(presenter == null) presenter
-        presenter!!.onAttachView(this@BaseActivity)
+        setContentView(layoutId)
+        initializeDagger()
+        initializePresenter()
+        presenter.initialize(intent.extras)
+
     }
 
     override fun onStart() {
         super.onStart()
+        presenter.onViewStart()
         AppLogger.lifecycle(this@BaseActivity, "onStart")
-        getPresenter()!!.onViewStop()
     }
 
     override fun onStop() {
         super.onStop()
         AppLogger.lifecycle(this@BaseActivity, "onStop")
+        presenter.onViewStop()
         hideLoading()
-        getPresenter()!!.onViewStop()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         AppLogger.lifecycle(this@BaseActivity, "onDestroy")
-        presenter?.onDetachView()
-        presenter = null
+        presenter.onDetachView()
     }
 
 

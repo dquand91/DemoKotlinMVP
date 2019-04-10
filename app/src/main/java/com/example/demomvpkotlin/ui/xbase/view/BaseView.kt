@@ -1,4 +1,4 @@
-package com.example.demomvpkotlin.ui.xbase
+package com.example.demomvpkotlin.ui.xbase.view
 
 public interface BaseView {
 

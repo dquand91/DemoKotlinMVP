@@ -1,14 +1,15 @@
-package com.example.demomvpkotlin.ui.xbase
+package com.example.demomvpkotlin.ui.xbase.presenter
 
-import android.app.Application
+import android.os.Bundle
 import android.widget.Toast
 import com.example.demomvpkotlin.data.DataCallBack
 import com.example.demomvpkotlin.data.network.usecase.BaseUseCase
 import com.example.demomvpkotlin.di.ContextProvider
+import com.example.demomvpkotlin.ui.xbase.view.BaseView
 import com.example.demomvpkotlin.utils.AppLogger
 import java.lang.ref.SoftReference
-abstract class BaseAppPresenter<V : BaseView, U : BaseUseCase> : BasePresenter<V> {
-
+abstract class BaseAppPresenter<V : BaseView>
+    : BasePresenter<V> {
 
     private val TAG = "BaseAppPresenter"
     protected var isLoadingData = false
@@ -18,10 +19,15 @@ abstract class BaseAppPresenter<V : BaseView, U : BaseUseCase> : BasePresenter<V
 
     fun getView(): V? = view?.get()
 
-    fun getUseCase() : U? = ContextProvider.provideDataManager() as U
-
-    override fun onAttachView(view: V) {
+    fun setView(view : V){
         this.view = SoftReference(view)
+    }
+
+    open fun initialize(extras: Bundle?) {}
+
+
+    override fun onAttachView(view: V?) {
+        this.view = SoftReference(view!!)
     }
 
     override fun onDetachView() {

@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -52,6 +54,12 @@ dependencies {
 
     implementation "android.arch.navigation:navigation-fragment:$nav_version" // For Kotlin use navigation-fragment-ktx
     implementation "android.arch.navigation:navigation-ui:$nav_version" // For Kotlin use navigation-ui-ktx
+
+    def dagger2Version = '2.19'
+
+    implementation "com.google.dagger:dagger:$dagger2Version"
+    kapt "com.google.dagger:dagger-compiler:$dagger2Version"
+
 
 
 }
