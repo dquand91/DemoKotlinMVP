@@ -42,6 +42,7 @@ class MainActivity : BaseActivity(), MainContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppLogger.error(TAG, "onCreate")
+        AppLogger.error(TAG, "onCrea123123123123te")
         initRecyclerView()
 
 
