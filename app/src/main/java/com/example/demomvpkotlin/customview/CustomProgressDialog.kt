@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.x_layout_dialog_loading.view.*
 
 class CustomProgressDialog(context: Context?, theme: Int) : ProgressDialog(context, theme) {
 
-     fun show(loadingText: String) {
+     override fun show() {
         super.show()
         setContentView(R.layout.x_layout_dialog_loading)
 //        if (TextUtils.isEmpty(loadingText)) {

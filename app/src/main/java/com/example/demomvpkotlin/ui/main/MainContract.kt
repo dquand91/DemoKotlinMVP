@@ -1,5 +1,6 @@
 package com.example.demomvpkotlin.ui.main
 
+import com.example.demomvpkotlin.data.network.response.DataItem
 import com.example.demomvpkotlin.data.network.usecase.BaseUseCase
 import com.example.demomvpkotlin.ui.xbase.contract.BaseContract
 import com.example.demomvpkotlin.ui.xbase.presenter.BasePresenter
@@ -12,7 +13,7 @@ class MainContract : BaseContract() {
     }
 
     interface View : BaseView{
-        fun onGetDataSuccess()
+        fun onGetDataSuccess(listData : List<DataItem>)
     }
 
 }

@@ -3,6 +3,7 @@ package com.example.demomvpkotlin.ui.main
 import android.os.Bundle
 import com.example.demomvpkotlin.data.AppDataManager
 import com.example.demomvpkotlin.data.DataCallBack
+import com.example.demomvpkotlin.data.network.response.DataItem
 import com.example.demomvpkotlin.data.network.response.DemoResponse
 import com.example.demomvpkotlin.ui.xbase.presenter.BaseAppPresenter
 import com.example.demomvpkotlin.utils.AppLogger
@@ -22,7 +23,7 @@ class MainPresenter
                 AppLogger.error(TAG, "getData --- onSuccess ---- $response")
                 getView()?.let {
                     getView()?.hideLoading()
-                    getView()?.onGetDataSuccess()
+                    getView()?.onGetDataSuccess(response.data as List<DataItem>)
                 }
             }
         })

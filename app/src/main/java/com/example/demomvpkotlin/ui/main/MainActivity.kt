@@ -2,14 +2,21 @@ package com.example.demomvpkotlin.ui.main
 
 import android.os.Bundle
 import android.os.Handler
+import android.support.v7.widget.LinearLayoutCompat
+import android.support.v7.widget.LinearLayoutManager
+import android.widget.LinearLayout
 import com.example.demomvpkotlin.App
 import com.example.demomvpkotlin.R
-import com.example.demomvpkotlin.data.network.usecase.BaseUseCase
+import com.example.demomvpkotlin.data.network.response.DataItem
+import com.example.demomvpkotlin.ui.main.adapter.DemoAdapter
 import com.example.demomvpkotlin.ui.xbase.view.BaseActivity
 import com.example.demomvpkotlin.utils.AppLogger
+import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainContract.View {
+
+    lateinit var mAdapter : DemoAdapter
 
     private val TAG = "MainActivity"
 
@@ -35,11 +42,27 @@ class MainActivity : BaseActivity(), MainContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppLogger.error(TAG, "onCreate")
-        Handler().postDelayed({
-            mainPresenter.getData()}, 3000)
+        initRecyclerView()
+
+
+        btnDemo.setOnClickListener {
+            mainPresenter.getData()
+        }
     }
 
-    override fun onGetDataSuccess() {
+    override fun onGetDataSuccess(list : List<DataItem>) {
         AppLogger.error(TAG, "onGetDataSuccess")
+        mAdapter.updateList(list)
+    }
+
+    fun initRecyclerView(){
+        mAdapter = DemoAdapter(this)
+        val layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = layoutManager
+        recyclerView.setHasFixedSize(true)
+        recyclerView.adapter = mAdapter
+
+
+
     }
 }
