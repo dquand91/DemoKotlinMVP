@@ -1,5 +1,6 @@
 package com.example.demomvpkotlin.data.network.client
 
+import com.example.demomvpkotlin.data.network.response.DemoResponse
 import com.google.gson.JsonObject
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -42,6 +43,9 @@ interface ApiClient {
         val HEADER_CONTENT_TYPE_IMAGE = "multipart/form-data"
         val MEDIA_TYPE_IMAGE = MediaType.parse("image/png")
     }
+
+    @GET("/api/unknown")
+    fun getDemoData():Call<DemoResponse>
 
 
     //    @POST("auth")

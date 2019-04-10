@@ -22,7 +22,8 @@ object AppConfigs {
     private val DEV_PORT_DATA = ":8063"
 
     //    public static final String API_HOST = HOST + PORT + "/neandrtalk/";
-    val API_HOST = "$HOST$PORT/"
+//    val API_HOST = "$HOST$PORT/"
+    val API_HOST = "https://reqres.in"
     val API_HOST_DATA = HOST + PORT_DATA
 
     private val ADMIN_HOST = "http://aeonadmin.azurewebsites.net/"

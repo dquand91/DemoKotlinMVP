@@ -3,6 +3,7 @@ package com.example.demomvpkotlin.ui.main
 import android.os.Bundle
 import com.example.demomvpkotlin.data.AppDataManager
 import com.example.demomvpkotlin.data.DataCallBack
+import com.example.demomvpkotlin.data.network.response.DemoResponse
 import com.example.demomvpkotlin.ui.xbase.presenter.BaseAppPresenter
 import com.example.demomvpkotlin.utils.AppLogger
 import javax.inject.Inject
@@ -15,9 +16,10 @@ class MainPresenter
 
     override fun getData() {
         getView()?.showLoading()
-        mainUseCase.getDemoData(object : DataCallBack<Any>(){
-            override fun onSuccess(response: Any, message: String) {
+        mainUseCase.getDemoData(object : DataCallBack<DemoResponse>(){
+            override fun onSuccess(response: DemoResponse, message: String) {
                 AppLogger.error(TAG, "getData --- onSuccess")
+                AppLogger.error(TAG, "getData --- onSuccess ---- $response")
                 getView()?.let {
                     getView()?.hideLoading()
                     getView()?.onGetDataSuccess()

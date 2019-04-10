@@ -2,6 +2,7 @@ package com.example.demomvpkotlin.data
 
 import com.example.demomvpkotlin.data.network.client.ApiHelper
 import com.example.demomvpkotlin.data.network.response.BaseResponse
+import com.example.demomvpkotlin.data.network.response.DemoResponse
 import com.example.demomvpkotlin.data.network.usecase.BaseUseCase
 import com.example.demomvpkotlin.di.ContextProvider
 import com.example.demomvpkotlin.utils.AppLogger
@@ -13,11 +14,17 @@ class AppDataManager @Inject constructor() : BaseDataManager(),
 
     private val TAG = "AppDataManager"
 
-    override fun getDemoData(callBack: DataCallBack<Any>) {
+    override fun getDemoData(callBack: DataCallBack<DemoResponse>) {
         AppLogger.error(TAG, "getDemoData")
-        android.os.Handler().postDelayed({
-            callBack.onSuccess((BaseResponse()), "Ok Success")
-        }, 3000)
+//        android.os.Handler().postDelayed({
+////            callBack.onSuccess((BaseResponse()), "Ok Success")
+////        }, 3000)
+
+        getApi().getDemoData(object : DataCallBack<DemoResponse>(){
+            override fun onSuccess(response: DemoResponse, message: String) {
+                callBack.onSuccess(response, "Ok Success")
+            }
+        })
     }
 
 

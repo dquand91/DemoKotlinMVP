@@ -5,6 +5,7 @@ import com.example.demomvpkotlin.data.CallBackHandler
 import com.example.demomvpkotlin.data.DataCallBack
 import com.example.demomvpkotlin.data.network.base.ApiCallback
 import com.example.demomvpkotlin.data.network.base.BaseApiHelper
+import com.example.demomvpkotlin.data.network.response.DemoResponse
 import okhttp3.OkHttpClient
 import java.util.HashMap
 
@@ -25,6 +26,10 @@ class ApiHelper(client: OkHttpClient) : BaseApiHelper<ApiClient>(client) {
             headers[ApiClient.HEADER_AUTHORIZATION] = token
         headers[ApiClient.HEADER_CONTENT_TYPE] = ApiClient.HEADER_CONTENT_TYPE_VALUE_JSON
         return headers
+    }
+
+    fun getDemoData(callBack: DataCallBack<DemoResponse>){
+        processRequest(getClient().getDemoData(), callBack)
     }
 
 
