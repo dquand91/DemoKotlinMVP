@@ -52,6 +52,7 @@ class MainActivity : BaseActivity(), MainContract.View {
 
     override fun onGetDataSuccess(list : List<DataItem>) {
         AppLogger.error(TAG, "onGetDataSuccess")
+        AppLogger.error(TAG, "onGetData1312321321Success")
         mAdapter.updateList(list)
     }
 
