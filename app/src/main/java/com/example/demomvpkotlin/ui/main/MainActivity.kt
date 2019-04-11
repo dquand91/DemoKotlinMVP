@@ -42,7 +42,6 @@ class MainActivity : BaseActivity(), MainContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppLogger.error(TAG, "onCreate")
-        AppLogger.error(TAG, "onCrea123123123123te")
         initRecyclerView()
 
 
@@ -53,7 +52,6 @@ class MainActivity : BaseActivity(), MainContract.View {
 
     override fun onGetDataSuccess(list : List<DataItem>) {
         AppLogger.error(TAG, "onGetDataSuccess")
-        AppLogger.error(TAG, "onGetData1312321321Success")
         mAdapter.updateList(list)
     }
 
